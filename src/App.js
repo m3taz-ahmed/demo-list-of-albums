@@ -6,23 +6,52 @@
  * @flow
  */
 
-import React from 'react';
-import {
-  StyleSheet,
-  View
-} from 'react-native';
+import React, { Component } from 'react';
+import { View, StyleSheet ,ActivityIndicator } from 'react-native';
 
 import { MyHeader } from './components/MyHeader';
 import { MyAlbum } from './components/MyAlbum';
+export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { isLoading: true }
+  }
 
-const App = () => {
-  return (
-    <View>
-      <MyHeader title='Albums!' textstyle={styles.header}/>
-      <MyAlbum/>
-    </View>
-  );
-};
+  componentDidMount() {
+    return fetch('https://rallycoding.herokuapp.com/api/music_albums')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        this.setState({
+          isLoading: false,
+          arrayOfData: responseJson,
+        }, function () {
+
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  render() {
+    if (this.state.isLoading) {
+      return (
+        <View style={{ flex: 1, padding: 50 }}>
+          <ActivityIndicator />
+        </View>
+      )
+    }
+
+    return (
+      <View>
+        <MyHeader title='Albums!' textstyle={styles.header} />
+        <MyAlbum arrayOfData={this.state.arrayOfData} />
+      </View>
+    );
+  }
+}
+
+
 
 const styles = StyleSheet.create({
   header: {
@@ -32,42 +61,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#fff',
   },
-  // scrollView: {
-  //   backgroundColor: Colors.lighter,
-  // },
-  // engine: {
-  //   position: 'absolute',
-  //   right: 0,
-  // },
-  // body: {
-  //   backgroundColor: Colors.white,
-  // },
-  // sectionContainer: {
-  //   marginTop: 32,
-  //   paddingHorizontal: 24,
-  // },
-  // sectionTitle: {
-  //   fontSize: 24,
-  //   fontWeight: '600',
-  //   color: Colors.black,
-  // },
-  // sectionDescription: {
-  //   marginTop: 8,
-  //   fontSize: 18,
-  //   fontWeight: '400',
-  //   color: Colors.dark,
-  // },
-  // highlight: {
-  //   fontWeight: '700',
-  // },
-  // footer: {
-  //   color: Colors.dark,
-  //   fontSize: 12,
-  //   fontWeight: '600',
-  //   padding: 4,
-  //   paddingRight: 12,
-  //   textAlign: 'right',
-  // },
 });
-
-export default App;
