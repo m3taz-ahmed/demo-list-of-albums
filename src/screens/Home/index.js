@@ -1,12 +1,10 @@
 
-import React, { Component } from 'react';
-import { View, StyleSheet ,ActivityIndicator } from 'react-native';
+import React from 'react';
+import { View, ActivityIndicator } from 'react-native';
 
-// import { MyHeader } from '.../components/MyHeader';
 import  MyList  from '../../components/MyList';
-import { styles } from './styles';
 
-export default class App extends Component {
+export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isLoading: true }
@@ -39,16 +37,16 @@ export default class App extends Component {
           <ActivityIndicator />
         </View>
       )
-    }
-
-    return (
-      <View>
-        <MyList
-            arrayOfData={this.state.arrayOfData} 
-            navigation={this.props.navigation}
-        />
-      </View>
-    );
+    }else{
+      return (
+        <View>
+          <MyList
+              arrayOfData={this.state.arrayOfData} 
+              navigation={this.props.navigation}
+          />
+        </View>
+      )
+    }   
   }
 }
 

@@ -4,7 +4,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import MyInput from '../../components/MyInput';
 import Btn from '../../components/Btn';
 
-export default class Login extends React.Component {
+export default class Sign extends React.Component {
   constructor(props) {
     super(props);
     this.state = {username:'',password:''};
@@ -17,10 +17,15 @@ export default class Login extends React.Component {
   render() {
     return (
         <View style={styles.container}>
-          <Text style={styles.welcome}>Login</Text>
+          <Text style={styles.welcome}>Sign Up</Text>
           <MyInput
             placeholder='Username'
             myReturn='username'
+            secure='false'
+          />
+          <MyInput
+            placeholder='Email'
+            myReturn='email'
             secure='false'
           />
           <MyInput
@@ -30,18 +35,10 @@ export default class Login extends React.Component {
           />
           <Btn
             press='Home'
-            btnText='Login'
+            btnText='Sign Up'
             type='nav'
             navigation={this.props.navigation}
-          />
-          <Text style={styles.text}>-- OR -- </Text>
-          <TouchableOpacity
-            style={styles.btn}
-            onPress={() => {this.props.navigation.navigate('Sign')}}
-          >
-            <Text style={styles.btnText}>Sign up Here</Text>
-          </TouchableOpacity>
-          
+          />          
         </View>
       )
     }
@@ -58,24 +55,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10
   },
-  text: {
-    fontSize: 16,
-    textAlign: 'center',
-    marginTop: -5
-  },
-  btn: {
-    justifyContent: 'center',
-    flexDirection: 'row',
-    alignContent: 'center',
-    backgroundColor: '#428AF8',
-    marginTop: 5,
-    marginLeft: 15,
-    marginRight: 15,
-    padding: 10,
-    borderRadius: 5,
-  },
-  btnText: {
-      color: '#ffffff',
-      fontWeight: '700'
-  }
-  });
+});

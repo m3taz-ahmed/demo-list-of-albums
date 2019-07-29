@@ -11,7 +11,7 @@ export default class Details extends Component {
     }
 
     static navigationOptions = {
-      header: null,
+      // header: null,
     };
 
   render() {
