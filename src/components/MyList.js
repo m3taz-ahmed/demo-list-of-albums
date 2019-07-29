@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, FlatList, Image, StyleSheet, Dimensions, TouchableOpacity, Linking } from 'react-native';
 import { navigate } from '../utils'
+import AlbumHeader from './AlbumHeader';
 
 
 
@@ -10,32 +11,27 @@ export default class MyList extends Component {
     }
 
     render() {
-        // console.log('test ', this.props.navigation);
+        console.log( 'MyList : ', this.props.arrayOfData);
         return (
             <FlatList
                 data={this.props.arrayOfData}
                 renderItem={({ item }) =>
-                    <View style={styles.album}>
-                        <TouchableOpacity style={styles.button} onPress={() => {
-                            this.props.navigation.navigate('Details', {
-                                url: item.url,
-                                thumbnail_image: item.thumbnail_image,
-                                title: item.title,
-                                artist: item.artist,
-                                image: item.image
-                            })
-                        }} >
-                            <View style={styles.albumDetails}>
-                                <View style={styles.thumbnailsContainer}>
-                                    <Image source={{ uri: item.thumbnail_image }} style={styles.thumbnails} />
-                                </View>
-                                <View style={styles.albumHeader}>
-                                    <Text style={styles.title}>{item.title}</Text>
-                                    <Text style={styles.artist}>{item.artist}</Text>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
+                    <TouchableOpacity style={styles.button} onPress={() => {
+                        this.props.navigation.navigate('Details', {
+                            url: item.url,
+                            thumbnail_image: item.thumbnail_image,
+                            title: item.title,
+                            artist: item.artist,
+                            image: item.image
+                        })
+                    }} >
+                        <AlbumHeader
+                            thumbnail_image={item.thumbnail_image}
+                            title={item.title}
+                            artist={item.artist}
+                            navigation={this.props.navigation}
+                        />
+                    </TouchableOpacity>
                 }
                 keyExtractor={(item) => item.url}
             />
@@ -44,44 +40,6 @@ export default class MyList extends Component {
     }
 }
 
-
-// export const MyList = ({ arrayOfData }) => {
-
-//   _keyExtractor = (item, index) => item.title;
-
-//   return (
-//     <FlatList
-//       data={arrayOfData}
-//       renderItem={({ item }) =>
-//         <View style={styles.album}>
-//         <TouchableOpacity style={styles.button} onPress={() => {
-//               this.props.navigation.navigate('Details'
-//             //   , {
-//             //     url: item.url,
-//             //     thumbnail_image: item.thumbnail_image,
-//             //     title: item.title,
-//             //     artist: item.artist,
-//             //     image: item.image
-//             //   })
-//               )
-//             }} >
-//         {/* onPress={() => Linking.openURL(item.url)}> */}
-//            <View style={styles.albumDetails}>
-//             <View style={styles.thumbnailsContainer}>
-//               <Image source={{ uri: item.thumbnail_image }} style={styles.thumbnails} />
-//             </View>
-//             <View style={styles.albumHeader}>
-//               <Text style={styles.title}>{item.title}</Text>
-//               <Text style={styles.artist}>{item.artist}</Text>
-//             </View>
-//           </View> 
-//           </TouchableOpacity>
-//         </View>
-//       }
-//       keyExtractor={this._keyExtractor}
-//     />
-//   ); 
-// };
 
 const styles = StyleSheet.create({
     album: {

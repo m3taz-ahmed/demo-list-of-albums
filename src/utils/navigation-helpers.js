@@ -5,17 +5,15 @@ let _navigator;
 const _navigators = {};
 
 
-
-
-export function navigate(routeName, params) {
-    //alert('routeName ' , routeName)
-    _navigator.dispatch(
-        NavigationActions.navigate({
-            routeName,
-            params,
-        })
-    );
-}
+// export function navigate(routeName, params) {
+//     //alert('routeName ' , routeName)
+//     _navigator.dispatch(
+//         NavigationActions.navigate({
+//             routeName,
+//             params,
+//         })
+//     );
+// }
 
 export function goBack() {
     _navigator.dispatch(NavigationActions.back());
