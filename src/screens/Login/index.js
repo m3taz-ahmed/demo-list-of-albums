@@ -21,11 +21,15 @@ export default class Login extends React.Component {
           <MyInput
             placeholder='Username'
             myReturn='username'
+            onChangeText={(username) => this.setState({ username })}
+            myvalue={this.state.username}
             secure='false'
           />
           <MyInput
             placeholder='Password'
             myReturn='password'
+            onChangeText={(password) => this.setState({ password })}
+            myvalue={this.state.password}
             secure='true'
           />
           <Btn

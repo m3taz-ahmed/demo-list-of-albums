@@ -5,19 +5,19 @@ import { TextInput, StyleSheet } from 'react-native';
 export default class MyInput extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {myValue:''};
+        // this.state = {value:''};
     }
 
     render() {
-        console.log('MyInput ', this.props)
+        // console.warn('MyInput ', this.props)
         
         if(this.props.secure === 'true'){
             return (
                 <TextInput
                     style={styles.input}
                     placeholder={this.props.placeholder}
-                    onChangeText={(myValue) => this.setState({ myValue })}
-                    value={this.state.myValue}
+                    onChangeText={this.props.onChangeText}
+                    value={this.props.myvalue}
                     secureTextEntry={true}
                 />
             )
@@ -26,8 +26,8 @@ export default class MyInput extends React.Component {
                 <TextInput
                     style={styles.input}
                     placeholder={this.props.placeholder}
-                    onChangeText={(myValue) => this.setState({ myValue })}
-                    value={this.state.myValue}
+                    onChangeText={this.props.onChangeText}
+                    value={this.props.myvalue}
                 />
             )
         }
